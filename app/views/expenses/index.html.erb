@@ -1,0 +1,41 @@
+<% if flash[:error].present? %>
+    <div id="error_explanation">
+      <ul>
+        <li><%= flash[:error] %></li>
+      </ul>
+    </div>
+<%else%>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+
+<b>Who owes whom report</b>
+<table border="1">
+  <tr>
+    <th>Who Owes whom?"</th>
+    <th>Amount</th>
+  </tr>
+  <% @owners.each do |owner| %>
+      <tr>
+        <td><span><%= Person.find(owner.payer_id).name %></span>
+          <span><%= "Owe" %></span>
+          <span><%= Person.find(owner.payee_id).name %></span>
+        </td>
+        <td><span><%= owner.settlement_amt %></span></td>
+      </tr>
+  <% end %>
+</table>
+
+<b>Who owes whom report</b>
+<table border="1">
+  <tr>
+    <th>Person Name</th>
+    <th>Total Expense Amount</th>
+  </tr>
+  <% @individuals.each do |individual| %>
+      <tr>
+        <td><span><%= Person.find(individual.person_id).name %></span></td>
+        <td><span><%= individual.ind_amount %></span></td>
+      </tr>
+  <% end %>
+</table>

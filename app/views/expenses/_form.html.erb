@@ -1,0 +1,41 @@
+<style type="text/css">
+  .exp_form {float: left; width:100%;}
+
+
+</style>
+
+<%= javascript_include_tag "expenses.js" %>
+<div class="exp_form">
+<%= form_for(@expense) do |f| %>
+    <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <ul>
+            <li><%= flash[:error] %></li>
+          </ul>
+        </div>
+    <% end %>
+    <table class="main_table" border="1">
+      <tr>
+        <td><%= f.label :location %></td>
+        <td><%= f.text_field :location %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :event_id %></td>
+        <td><%= collection_select(:expense, :event_id, Event.all, :id, :name, prompt: true) %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :exp_date %></td>
+        <td><%= f.text_field :exp_date, 'data-provide' => 'datepicker' %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :total_amount %></td>
+        <td><%= f.text_field :total_amount %></td>
+      </tr>
+      <%= render :partial => "persons_expenses", :locals => {:f => f} %>
+      <tr>
+        <td colspan="2" align="center"><%= submit_tag "Save Expense", id: "save", :class =>'home_bttn' %></td>
+      </tr>
+
+    </table>
+<% end %>
+</div>

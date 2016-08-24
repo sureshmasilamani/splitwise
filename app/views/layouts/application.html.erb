@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Splitwise</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+<style>
+
+</style>
+
+
+</head>
+<body>
+<div class="header">
+<p>Expense Managment - Split Expense</p>
+</div>
+
+<div class="home">
+<div style="width:100%; float:left;">
+  <% if user_signed_in? %>
+      <div style="width:50% float:left;"><p style="margin:0 auto; float:left;">Logged in as <strong><%= current_user.email %></strong></p></div>
+      <div style="float:right;">
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete, :class => 'navbar-link red_bttn'  %>
+      <%= link_to "Home", authenticated_root_path, method: :get, :class => 'navbar-link home_bttn'  %></div></div>
+      <div class="main">
+      <%= link_to "Add Expense", new_expense_path, method: :get, :class => 'navbar-link main_bttn'  %>
+      <%= link_to "Events", events_path, method: :get, :class => 'navbar-link main_bttn'  %>
+      <%= link_to "Friends", people_path, method: :get, :class => 'navbar-link main_bttn'  %>
+      <%= link_to "Report", date_range_reports_path, method: :get, :class => 'navbar-link main_bttn'  %>
+      </div>
+  <% else %>
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link blue_bttn'  %> |
+      <%= link_to "Login", new_user_session_path, :class => 'navbar-link home_bttn'  %>
+  <% end %>
+<%= yield %>
+</div>
+<div class="footer">
+<p>Copyright@Suresh M</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<tr>
+  <td><%= check_box_tag "all", "check_box", false, class: "all_persons" %>ALL</td>
+  <td>Individual Amount</td>
+</tr>
+<% @persons.each do |person| %>
+    <tr>
+      <td><%= check_box_tag :person, "#{person.id}", false, class: "check_person" %>
+        <span><%= person.description %></td>
+      <td><%= text_field "expense[person][#{person.id}]", :amount, value: 0.00, disabled: true, class: "amount" %></td>
+    </tr>
+<% end %>

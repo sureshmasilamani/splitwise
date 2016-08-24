@@ -1,0 +1,36 @@
+<br/>
+<table border="0">
+  <tr>
+    <td>From Date</td>
+    <td><%= text_field :from, :date, 'data-provide' => 'datepicker' %></td>
+    <td>To Date</td>
+    <td><%= text_field :to, :date, 'data-provide' => 'datepicker' %></td>
+    <td><%= button_tag "Fetch", id: "fetch", data: {disable_with: "Please wait..."} %></td>
+  </tr>
+</table>
+
+<div id="view_report"></div>
+<script>
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy'
+    })
+    $("#fetch").click(function () {
+        var from_date = $('#from_date').val();
+        var to_date = $('#to_date').val()
+        if (from_date != "" && to_date != "") {
+            $.ajax({
+                url: "/reports/fetch_expenses_report",
+                dataType: 'script',
+                data: { from_date: from_date, to_date: to_date },
+                success: function () {
+
+                }
+            })
+        }
+        else {
+            alert("Please Enter the proper date");
+        }
+
+    });
+
+</script>

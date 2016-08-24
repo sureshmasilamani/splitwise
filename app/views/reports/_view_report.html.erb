@@ -1,0 +1,36 @@
+
+
+<div class="center_heading">
+<h3>Individual Expense</h3>
+</div>
+<table class="main_table">
+  <tr>
+    <th>Who Owes whom?"</th>
+    <th>Amount</th>
+  </tr>
+  <% @owners.each do |owner| %>
+  <tr>
+    <td><span><%= Person.find(owner.payer_id).name %></span>
+      <span><%= "Owe" %></span>
+      <span><%= Person.find(owner.payee_id).name %></span>
+    </td>
+    <td><span><%= owner.settlement_amt %></span></td>
+  </tr>
+  <% end %>
+</table>
+
+<div class="center_heading">
+<h3>Total Expense</h3>
+</div>
+<table class="main_table">
+  <tr>
+    <th>Person Name</th>
+    <th>Total Expense Amount</th>
+  </tr>
+  <% @individuals.each do |individual| %>
+  <tr>
+    <td><span><%= Person.find(individual.person_id).name %></span></td>
+    <td><span><%= individual.ind_amount %></span></td>
+  </tr>
+  <% end %>
+</table>
